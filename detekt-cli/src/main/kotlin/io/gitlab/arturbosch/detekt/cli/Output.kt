@@ -19,6 +19,7 @@ class Output(detektion: Detektion, args: Main) {
 	private val withOutput: Boolean = args.output
 	private val withBaseline: Boolean = args.baseline
 	private val reportDirectory: Path? = args.reportDirectory
+	private val baselineDirectory: Path? = args.baselineDirectory
 	private val findings: Map<String, List<Finding>> = detektion.findings
 	private val notifications: List<Notification> = detektion.notifications
 
@@ -49,7 +50,7 @@ class Output(detektion: Detektion, args: Main) {
 	}
 
 	private fun printFindings() {
-		val listings = DetektBaselineFormat.listings(reportDirectory)
+		val listings = DetektBaselineFormat.listings(baselineDirectory)
 		if (listings != null) println("Only new findings are printed as baseline.xml is found:\n")
 
 		findings.forEach {

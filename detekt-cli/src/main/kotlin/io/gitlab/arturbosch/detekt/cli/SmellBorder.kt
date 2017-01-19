@@ -11,12 +11,12 @@ class SmellBorder(config: Config, main: Main) {
 	private val subConfig = config.subConfig("build")
 	private val warning = subConfig.valueOrDefault("warningThreshold") { -1 }
 	private val fail = subConfig.valueOrDefault("failThreshold") { -1 }
-	private val reportDirectory = main.reportDirectory
+	private val baselineDirectory = main.baselineDirectory
 
 	class SmellThresholdReachedError(override val message: String?) : RuntimeException(message)
 
 	fun check(detektion: Detektion) {
-		val listings = DetektBaselineFormat.listings(reportDirectory)
+		val listings = DetektBaselineFormat.listings(baselineDirectory)
 		val smells = detektion.findings.flatMap { it.value }
 		val filteredSmells = smells.filterListedFindings(listings)
 		val amount = filteredSmells.size

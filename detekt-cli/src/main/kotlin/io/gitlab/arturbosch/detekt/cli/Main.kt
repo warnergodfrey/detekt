@@ -21,6 +21,10 @@ class Main {
 			converter = ExistingPathConverter::class)
 	var config: Path? = null
 
+	@Parameter(names = arrayOf("--baselinedir", "-bl"), description = "Path to the directory where the current baseline.xml file exists.",
+			converter = ExistingPathConverter::class)
+	var baselineDirectory: Path? = null
+
 	@Parameter(names = arrayOf("--report", "-rp"), description = "Path to the report directory where findings should be stored (if --output) and baseline.xml generated (if --baseline).",
 			converter = PathConverter::class)
 	var reportDirectory: Path? = null
@@ -37,7 +41,7 @@ class Main {
 	@Parameter(names = arrayOf("--useTabs"), description = "Tells the formatter that indentation with tabs are valid.")
 	val useTabs: Boolean = false
 
-	@Parameter(names = arrayOf("--baseline", "-b"), description = "Treats current analysis findings as a smell baseline for further detekt runs. If a baseline xml file exists, only new code smells not in the baseline are printed in the console.")
+	@Parameter(names = arrayOf("--baseline", "-b"), description = "Treats current analysis findings as a smell baseline for further detekt runs. If a baseline config xml file exists with --baselineconfig, only new code smells not in the baseline are printed in the console.")
 	var baseline: Boolean = false
 
 	@Parameter(names = arrayOf("--output", "-o"), description = "True if findings should be written into a report.detekt file inside the report folder.")
